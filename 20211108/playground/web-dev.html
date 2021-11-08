@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- hello world -->
+    </div>
+    <script>
+       var div = document.querySelector('#app');
+       var str = 'hello world';
+       div.innerHTML =str;
+
+    //    기존 방식으로는 바뀐내용이 적용되지 않는다.
+    //    바뀐 변수 값은 다시 넣어줘야 반영이 된다.
+       str = 'hello world!!!!';
+       div.innerHTML = str;
+    </script>
+</body>
+</html>
