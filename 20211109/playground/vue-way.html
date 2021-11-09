@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+<!-- 
+    Reactivity 코드 라이브러화 하기. 
+    Object.defineProperty를 함수로 만들어본다. 
+-->
+
+
+    <script>
+       var div = document.querySelector('#app');
+       var viewModel = {};
+
+       //즉시실행함수.
+       //내부의 함수들을 application 로직에 노출되지 않도록 또다른 스코프(유효범위)에 넣어준다.
+       //일반적으로 오픈소스 라이브러리들이 이런식으로 관리된다.
+       (function(){
+
+            function init(){
+            Object.defineProperty(viewModel,'str',{
+                //속성에 접근했을 때의 동작을 정의
+                get : function(){
+                    console.log('접근');
+                },
+                //속성에 값을 할당했을때의 동작을 정의
+                set : function(newValue){
+                    console.log('할당', newValue);
+                    //vue 의 핵심. 새로운 값을 받을때마다 화면이 바뀐다.
+                    //Reactivity! 반응성!
+                    //데이터의 변화를 library 에서 감지해서 화면에 자동으로 그려주는것.
+                    render(newValue);
+                }
+            });
+            }
+    
+            function render(value){
+                div.innerHTML= value; 
+            }
+        
+            init();
+
+       }());
+      
+    </script>
+</body>
+</html>

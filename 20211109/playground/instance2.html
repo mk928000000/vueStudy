@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+<div id="app">
+    <!-- ... -->
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+ //공식문서에 나와있는  opptions 방식.
+ // options 객체를 변수로 정의하고 생성자에 담는 방법.
+var options = {
+        el : '#app',
+        data : {
+            message:'hi'
+        },
+        methods: {
+
+        },
+    };
+
+    var vm = new Vue(options);
+
+
+//객체 리터럴 방식.
+//`객체`를 통째로 생성자 안에 넣는 방법. 
+//객체를 넣었으므로 콤마를 찍고 인자를 늘려간다.
+    var vm = new Vue({
+        el : '#app',
+        data : {
+            message:'hi'
+        },
+        created: function(){
+
+        }
+    });
+</script>
+
+</body>
+</html>
