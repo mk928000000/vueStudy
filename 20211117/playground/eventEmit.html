@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+<!--
+
+        event emit
+        하위에서 상위 컴포넌트 : 이벤트를 올린다. event emit
+
+        하위 컴포넌트 이벤트가 발생했을 때 상위컴포넌트의 메서드가 실행된다.
+        <app-header v-on:하위 컴포넌트에서 발생한 이벤트 이름="상위컴포넌트의 메서드 이름"></app-header>
+
+-->
+
+        <app-header v-on:pass="logText"></app-header>
+        <app-content v-on:add="addNumber"></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        //event emit. 사용해보기.
+        //이벤트를 일으킨 버튼을 클릭하면 개발자도구에서 실행된 이벤트들을 볼 수 있다.
+        var appHeader = {
+                        //버튼을 클릭하면 passEvent 라는 메소드를 실행하겠다.
+            template : '<button v-on:click="passEvent">click me</button>',
+            methods :{
+                passEvent : function (){ //메소드함수 passEvent 생성
+                    this.$emit('pass'); // 위쪽에 보내는 이벤트 이름 pass 정의
+                }
+            }
+        }
+
+        var appContent = {
+            template: '<button v-on:click="addNumber">add</button>',
+            methods : {
+                addNumber : function(){
+                    this.$emit('add')
+                }
+            }
+        }
+
+        var obj = {
+            num : 10,
+            getNumber : function(){
+                console.log(this.num)}  //여기에서의 this 는 obj 를 가리킨다
+        }
+
+           var vm = new Vue({
+                el: '#app',
+                components: {
+                    'app-header' : appHeader
+                    ,'app-content': appContent
+
+                },
+                methods:{
+                    logText:function (){ // 이벤트 이름 logText 정의
+                        console.log('hi!');
+                    },
+                    addNumber:function(){
+                        this.num++;
+                        console.log(this.num);
+                    }
+
+                },
+                data : {
+                    num:10          // data 안에 있는 변수이지만 var obj 의 num 처럼 this 는 이 num 을 바라본다
+                }
+            });
+
+    </script>
+</body>
+</html>
